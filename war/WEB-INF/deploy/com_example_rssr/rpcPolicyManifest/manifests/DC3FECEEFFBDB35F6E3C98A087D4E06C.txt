@@ -1,0 +1,2 @@
+serviceClass: com.example.rssr.client.FeedService
+path: 0D2C94AC297B37E8A89FF0967F19352B.gwt.rpc

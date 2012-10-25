@@ -1,0 +1,2 @@
+serviceClass: com.example.rssr.client.GreetingService
+path: DF08F438B85E4B31098ECF4B23D40E38.gwt.rpc

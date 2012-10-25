@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='com_example_rssr'>
+
+  <inherits name='com.google.gwt.user.User'/>
+   
+ <!-- <inherits name='com.google.gwt.user.theme.clean.Clean'/> -->
+  
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+  <inherits name='com.github.gwtbootstrap.Bootstrap' />
+
+  <!-- Specify the app entry point class.                         -->
+  <entry-point class='com.example.rssr.client.Rss'/>
+
+  <!-- Specify the paths for translatable code                    -->
+  <source path='client'/>
+  <source path='shared'/>
+
+</module>

@@ -1,0 +1,2 @@
+serviceClass: com.example.rssr.client.LoginService
+path: 503DD9CC8C924410516005AA63311FEF.gwt.rpc

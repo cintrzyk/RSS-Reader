@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link type="text/css" rel="stylesheet" href="Com_example_rssr.css">
+
+    <title>RSS Reader Project</title>
+
+    <script type="text/javascript" language="javascript" src="com_example_rssr/com_example_rssr.nocache.js"></script>
+    <!-- before your module(*.nocache.js) loading  -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--[if IE 7]>
+		<link rel="stylesheet" href="{your module name}/css/font-awesome-ie7.css">
+	<![endif]-->
+	<!-- your module(*.nocache.js) loading  -->
+  </head>
+           
+  <body id="body">
+
+    <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+    
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <div class="container-fluid">
+    
+    <div id="loginForm" class="form-inline">
+    	
+   </div>
+    
+    </div>
+	   
+    
+    <div class="container-fluid">
+    <div class="mainBorder">
+    	<div class="row-fluid">
+    		<div id="pageTitle"><div id="loginDiv"> </div><img src="img/3.png" alt="icon" id="iconTitle">RSS Reader <span id="refreshSpan"> </span> </div>
+    	</div>
+    	<div class="row-fluid">
+    		<div class="span4">
+	    		<div id="error" style="color: red;">
+	    			
+				</div>
+				<br>
+				<h6>Add new RSS channel</h6>
+				<div id="addFeed"></div>
+				<br><br>
+				<div id="channelsDiv">
+				<!-- 
+					<h3><img src="img/book.png" alt="icon" id="iconChannels">Channels list</h3>
+					-->
+    				<div id="channelList" ></div>
+    			
+    			</div>
+    		</div>
+    		<div class="span8">
+				<div id="feedList" class="table"></div>	
+    		</div>
+    	</div>
+    </div>
+    <footer>
+    	Framework: Google Web Toolkit | Project: RSS Reader
+    </footer>
+    </div>
+  </body>
+</html>
