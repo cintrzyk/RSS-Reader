@@ -1,6 +1,7 @@
 package com.example.rssr.server;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.horrabin.horrorss.RssChannelBean;
@@ -32,11 +33,11 @@ public class FeedServiceImpl extends RemoteServiceServlet implements
 			RssFeed feed = getFeed(url);
 			List<RssItemBean> items = feed.getItems();
 	        for (int i=0; i<items.size(); i++){
-	             RssItemBean item = items.get(i); 
-	             feeds.add(new Feed(item.getLink(), item.getTitle(), item.getDescription()));
+	             RssItemBean item = items.get(i);
+	             feeds.add(new Feed(item.getLink(), item.getTitle(), item.getDescription(), item.getPubDate()));
 	        }
 		}
-		return feeds;
+		return Arrays.sort(feeds, Feed.FruitNameComparator);;
 	}
 	
 	private RssFeed getFeed(String url) {

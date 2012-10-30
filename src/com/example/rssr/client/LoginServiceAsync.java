@@ -3,5 +3,8 @@ package com.example.rssr.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface LoginServiceAsync {
-	void isLogin(String login, String password, AsyncCallback<Boolean> callback);
+	void isValidUserPassword(String login, String password,
+			AsyncCallback<String> callback);
+
+	void isTokenValid(String token, AsyncCallback<Boolean> callback);
 }

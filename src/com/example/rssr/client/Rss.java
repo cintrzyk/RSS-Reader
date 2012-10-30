@@ -30,7 +30,13 @@ public class Rss implements EntryPoint {
 	private TextBox loginTextBox = new TextBox();
 	private PasswordTextBox passwordTextBox = new PasswordTextBox();
 	private Button loginButton = new Button("sign in");
+	private Button logoutButton = new Button("logout");
+
 	private Label loginStatusLabel = new Label();
+	private String token = "";
+	private Boolean loggedIn = false;
+
+	
 	//TABLES
 	private FlexTable feedsFlexTable = new FlexTable();
 	private FlexTable channelsFlexTable = new FlexTable();
@@ -64,9 +70,19 @@ public class Rss implements EntryPoint {
 				checkLogin();
 			}
 		});
+	    logoutButton.setStyleName("btn btn-danger");
+	    logoutButton.setVisible(false);
+	    logoutButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				logout();
+			}
+		}); 
+	    
 	    RootPanel.get("loginForm").add(loginTextBox);
 	    RootPanel.get("loginForm").add(passwordTextBox);
 	    RootPanel.get("loginForm").add(loginButton);
+	    RootPanel.get("loginForm").add(logoutButton);
 	    RootPanel.get("loginDiv").add(loginStatusLabel);
 	    loginStatusLabel.setText("please sign in");
 	    
@@ -88,7 +104,9 @@ public class Rss implements EntryPoint {
 	    RootPanel.get("feedList").add(feedsFlexTable);
 	    
 	    addChannelTextBox.setFocus(true);
-		
+	    addChannelTextBox.setVisible(false);
+	    RootPanel.get("titleAdd").setVisible(false);
+	    addChannelButton.setVisible(false);
 	    addChannelButton.setStyleName("btn btn-large btn-primary");
 		
 	    addChannelButton.addClickHandler(new ClickHandler() {
@@ -199,21 +217,85 @@ public class Rss implements EntryPoint {
 	
 	//check if user is login
 	private void checkLogin(){
-		loginService.isLogin(loginTextBox.getText(), passwordTextBox.getText(), new AsyncCallback<Boolean>() {
+		
+		//validation
+		if (!FieldVerifier.isValidName(loginTextBox.getText())) {
+			errorLabel.setText("Name is not valid");
+			loginTextBox.setFocus(true);
+			return;
+		}
+		
+
+		if (!FieldVerifier.isValidPassword(passwordTextBox.getText())) {
+			errorLabel.setText("Password is not valid");
+			passwordTextBox.setFocus(true);
+			return;
+		}
+		
+		loginService.isValidUserPassword(loginTextBox.getText(), passwordTextBox.getText(), new AsyncCallback<String>() {
 			
 			@Override
-			public void onSuccess(Boolean result) {
-				if (result == true)
-					loginStatusLabel.setText("Hello user!");
-				else 
-					loginStatusLabel.setText("Incorrect data");
+			public void onSuccess(String result) {
+				if (result != null)
+					if (result.length() > 0) {
+						setLoggedIn(true);
+						setToken(result);
+					} else {
+						setLoggedIn(false);
+						setToken(result);
+					}
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				loginStatusLabel.setText("failed to login");
+				//loginStatusLabel.setText("failed to login");
+				setLoggedIn(false);
 			}
 		});
+	}
+	
+	public Boolean getLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(Boolean loggedIn) {
+		if (loggedIn){
+			loginStatusLabel.setText("Hello admin");
+		    logoutButton.setVisible(true);
+		    loginButton.setVisible(false);
+		    loginTextBox.setVisible(false);
+		    passwordTextBox.setVisible(false);
+		    addChannelTextBox.setVisible(true);
+		    addChannelButton.setVisible(true);
+		    RootPanel.get("titleAdd").setVisible(true);
+		    feedsFlexTable.setVisible(true);
+		    channelsFlexTable.setVisible(true);
+
+		}
+		else loginStatusLabel.setText("Please log in");
+		this.loggedIn = loggedIn;
+	}
+	
+	public void logout(){
+		setToken("");
+		setLoggedIn(false);
+	    logoutButton.setVisible(false);
+	    loginButton.setVisible(true);
+	    loginTextBox.setVisible(true);
+	    passwordTextBox.setVisible(true);
+	    addChannelTextBox.setVisible(false);
+	    addChannelButton.setVisible(false);
+	    RootPanel.get("titleAdd").setVisible(false);
+	    feedsFlexTable.setVisible(false);
+	    channelsFlexTable.setVisible(false);
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 	

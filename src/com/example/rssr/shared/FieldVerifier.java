@@ -12,6 +12,18 @@ public class FieldVerifier {
 		return true;
 	}
 	
+	public static boolean isValidName(String name) {
+		if (name!="")
+			return true;
+		return false;
+	}
+	
+	public static boolean isValidPassword(String pass) {
+		if (pass!="")
+			return true;
+		return false;
+	}
+	
 	private static boolean IsMatch(String s, String pattern) {
         try {
             Pattern patt = Pattern.compile(pattern);

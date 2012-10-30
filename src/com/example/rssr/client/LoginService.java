@@ -6,5 +6,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("loginService")
 public interface LoginService extends RemoteService {
-	Boolean isLogin(String login, String password);
+	String isValidUserPassword(String login, String password);
+	boolean isTokenValid(String token);
 }
